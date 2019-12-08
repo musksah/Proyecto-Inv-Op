@@ -5,15 +5,48 @@ $data = $_POST;
 // echo $num_mayor = mayor($array_datas);
 // header("Location: ../payoff.php?maximo=$num_mayor");
 $function = $_POST['funcion'];
-
-$function($_POST);
+unset($data['funcion']);
+$function($data);
 // sumarize($data);
 
 function sumarize($data)
 {
-    $mayor_a = mayor($data['A']);
-    $mayor_b = mayor($data['B']);
-    matrixRegreat($mayor_a, $mayor_b, $data['A'], $data['B']);
+    // print_r($data);
+    encontrarMayores($data);
+    // matrixRegreat($mayor_a, $mayor_b, $data['A'], $data['B']);
+}
+
+function encontrarMayores($data)
+{
+    $mayores = [];
+    $index = [];
+    foreach ($data as $key => $value_index) {
+        foreach ($value_index as $key => $value) {
+            $index[$key] = $key;
+        }
+    }
+    foreach ($index as $key => $value) {
+        $mayores_arr[$key] = array_column($data, $value);
+    }
+    foreach ($mayores_arr as $key => $value) {
+        $mayores[$key] = mayor($value);
+    }
+
+    foreach ($data as $key => $value) {
+        foreach ($value as $key_col => $value_col) {
+            $result[$key][] = $mayores[$key_col] - $value_col;
+        }
+    }
+    $table = "<div class='table-responsive'><table class='table'>";
+    foreach ($result as $key => $value) {
+        $table .= "<tr>";
+        foreach ($value as $key_col => $value_col) {
+            $table .= "<td>" . $value_col . "</td>";
+        }
+        $table .= "</tr>";
+    }
+    $table .= "</table></div>";
+    echo json_encode($table);
 }
 
 function matrixRegreat($mayor_a, $mayor_b, $a, $b)
@@ -34,7 +67,23 @@ function PayOffMatrix($data)
 {
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
-    $table_form = '<form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
+    $table_form = '
+    <script>
+    $("#form_payoff_data").submit(function (event) {
+        event.preventDefault();
+        debugger
+        $.ajax({
+            method: "POST",
+            url: "controllers/maximaxcontroller.php",
+            data: $(this).serialize()
+        }).done(function (data) {
+            console.log(data);
+            $("#matrix_regreat").html(data);
+        });
+    });
+    </script>
+    
+    <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
     <input type="hidden" name="funcion" value="sumarize">
     <div class="table-responsive">
     <table class="table">
@@ -49,31 +98,40 @@ function PayOffMatrix($data)
             </th>';
     }
     $table_form .= "</thead><tbody>";
-    
 
-    for ($i=1; $i < $rows+1 ; $i++) { 
-        $table_form.= "
+
+    for ($i = 1; $i < $rows + 1; $i++) {
+        $table_form .= "
         <tr> 
             <td class='text-center'>
-                <h3>alternative".$i."</h3>
+                <h3>alternative" . $i . "</h3>
                 </td>";
-        for ($j=1; $j < $colums+1 ; $j++) { 
-            $table_form.="
+        for ($j = 1; $j < $colums + 1; $j++) {
+            $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='A".$i."[U".$j."]' placeholder='Enter Number' name='A".$i."[U".$j."]'>
+                    <input type='text' class='form-control' id='A" . $i . "[U" . $j . "]' placeholder='Enter Number' name='A" . $i . "[U" . $j . "]'>
                 </div>
             </td>";
         }
-        $table_form.= "
+        $table_form .= "
         </tr>";
     }
+    $table_form.="<tr><td><h3>Probability</h3></td>";
+    for ($i = 1; $i < $colums + 1; $i++) { 
+        $table_form.="<td>
+        <div class='form-group'>
+            <input type='text' class='form-control' id='P"."[U" . $i . "]' placeholder='Enter Number' name='P"."[U" . $i . "]'>
+        </div>
+        </td>";
+    }
+    $table_form.="</tr>";
     $table_form .= "
             </tbody>
         </table>
         </div>
         <div class='form-group'>
-            <button type='submit' class='btn btn-primary'>Calcular</button>
+            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calcular</button>
         </div>
     </form>";
     echo json_encode($table_form);

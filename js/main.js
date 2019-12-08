@@ -11,16 +11,21 @@
     // Listen for the jQuery ready event on the document
     $(function () {
         // The DOM is ready!
-        $("#form_payoff_data").submit(function (event) {
-            event.preventDefault();
-            $.ajax({
-                method: "POST",
-                url: "controllers/maximaxcontroller.php",
-                data: $(this).serialize()
-            }).done(function (data) {
-                console.log(data);
-                matrix_regreat(data);
-            });
+        // $("#form_payoff_data").submit(function (event) {
+        //     event.preventDefault();
+        //     debugger
+        //     $.ajax({
+        //         method: "POST",
+        //         url: "controllers/maximaxcontroller.php",
+        //         data: $(this).serialize()
+        //     }).done(function (data) {
+        //         console.log(data);
+        //         $("#matrix_regreat").html(data);
+        //     });
+        // });
+
+        $("#btn_submit_payoff").on('click', function(){
+            alert("hola");
         });
 
         $("#form_matrix_generator").submit(function (event) {
