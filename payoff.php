@@ -60,7 +60,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Methods:</h6>
-            <a class="collapse-item" href="buttons.html">MaxiMin</a>
+            <a class="collapse-item" href="payoff.php">MaxiMin</a>
             <a class="collapse-item" href="cards.html">Sensibility Analysis</a>
           </div>
         </div>
@@ -106,22 +106,61 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">PayOffs</h1>
+            <h1 class="h3 mb-0 text-gray-800">Desicion Methods</h1>
           </div>
 
           <div>
 
             <div>
 
-              <div class="col-lg-6">
+              <div class="col-md-9 offset-md-1">
 
                 <!-- Default Card Example -->
                 <div class="card mb-4">
                   <div class="card-header">
-                    Datos del Programa
+                    Matrix Generator
                   </div>
                   <div class="card-body">
-                    <form action="controllers/maximaxcontroller.php" method="POST">
+                    <form action="controllers/maximaxcontroller.php" method="POST" id="form_matrix_generator">
+                      <input type="hidden" name="funcion" value="PayOffMatrix">
+                      <div class="row">
+                        <!-- <div class="col-md-6">
+                          <label for=""></label>  
+                        </div> -->
+                        <div class="col-md-4" style="margin-top: 10px">
+                          <label for="num_alterns">Cantidad de Alternativas:</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="number" min="1" max="15" placeholder="Ingrese un número" class="form-control" name="num_alterns" id="num_alterns" required>
+                        </div>
+                      </div>
+                      <div class="form-group row" style="margin-top: 30px">
+                        <div class="col-md-4">
+                          <label for="num_uncerts">Casos de Incertidumbre:</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="number" min="1" max="15" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                        </div>
+                      </div>
+                      <div class="form-group row" style="margin-top: 30px">
+                        <div class="col-md-12 text-center">
+                          <input type="submit" placeholder="Ingrese un número" class="btn btn-primary" value="Generar Matriz">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" id="payoff_matrix_container">
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">PayOff Matrix</h6>
+                  </div>
+                  <div class="card-body" id="card-body-payoff-matrix">
+                    <!-- <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
+                      <input type="hidden" name="funcion" value="sumarize">
                       <table class="table">
                         <thead>
                           <tr>
@@ -141,12 +180,12 @@
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="AA" aria-describedby="emailHelp" placeholder="Enter Number" name="AA">
+                                <input type="text" class="form-control" id="A[A]" aria-describedby="emailHelp" placeholder="Enter Number" name="A[A]">
                               </div>
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="AB" aria-describedby="emailHelp" placeholder="Enter Number" name="AB">
+                                <input type="text" class="form-control" id="B[A]" aria-describedby="emailHelp" placeholder="Enter Number" name="B[A]">
                               </div>
                             </td>
                           </tr>
@@ -156,12 +195,12 @@
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="BA" placeholder="Enter Number" name="BA">
+                                <input type="text" class="form-control" id="A[B]" placeholder="Enter Number" name="A[B]">
                               </div>
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="BB" aria-describedby="emailHelp" placeholder="Enter Number" name="BB">
+                                <input type="text" class="form-control" id="B[B]" aria-describedby="emailHelp" placeholder="Enter Number" name="B[B]">
                               </div>
                             </td>
                           </tr>
@@ -171,12 +210,12 @@
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="A_BA" aria-describedby="emailHelp" placeholder="Enter Number" name="A_BA">
+                                <input type="text" class="form-control" id="A[AB]" aria-describedby="emailHelp" placeholder="Enter Number" name="A[AB]">
                               </div>
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="A_BB" aria-describedby="emailHelp" placeholder="Enter Number" name="A_BB">
+                                <input type="text" class="form-control" id="B[AB]" aria-describedby="emailHelp" placeholder="Enter Number" name="B[AB]">
                               </div>
                             </td>
                           </tr>
@@ -186,28 +225,56 @@
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="noneA" placeholder="Enter Number">
+                                <input type="text" class="form-control" id="A[none]" placeholder="Enter Number" name="A[none]">
                               </div>
                             </td>
                             <td class="">
                               <div class="form-group">
-                                <input type="text" class="form-control" id="noneB" aria-describedby="emailHelp" placeholder="Enter Number">
+                                <input type="text" class="form-control" id="B[none]" aria-describedby="emailHelp" placeholder="Enter Number" name="B[none]">
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                          <tr>
+                            <td class="  text-center">
+                              <h3>Probability</h3>
+                            </td>
+                            <td class="">
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="prob[A]" placeholder="Enter Probability" name="prob[A]">
+                              </div>
+                            </td>
+                            <td class="">
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="prob[B]" aria-describedby="emailHelp" placeholder="Enter Probability" name="prob[B]">
                               </div>
                             </td>
                           </tr>
                           <tr>
                             <td class="text-center">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" class="btn btn-primary">Calcular</button>
                             </td>
                           </tr>
                         </tbody>
                       </table>
-                    </form>
+                    </form> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9 offset-md-1">
+
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    Regreat Matrix Desicion
+                  </div>
+                  <div class="card-body" id="matrix_regreat">
+
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-md-9 offset-md-1">
 
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
@@ -275,9 +342,10 @@
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>          
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+        <script src="js/main.js"></script>
 
 </body>
 
