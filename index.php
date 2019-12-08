@@ -60,7 +60,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Methods:</h6>
-                        <a class="collapse-item" href="payoff.html">MaxiMin</a>
+                        <a class="collapse-item" href="payoff.php">MaxiMin</a>
                         <a class="collapse-item" href="cards.html">Sensibility Analysis</a>
                     </div>
                 </div>
