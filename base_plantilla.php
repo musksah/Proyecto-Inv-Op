@@ -130,7 +130,7 @@
                   </div>
                   <div class="card-body">
                     <form action="controllers/maximaxcontroller.php" method="POST" id="form_matrix_generator">
-                      <input type="hidden" name="funcion" value="holaMundo">
+                      <input type="hidden" name="funcion" value="PayOffMatrix">
                       <div class="row">
                         <!-- <div class="col-md-6">
                           <label for=""></label>  

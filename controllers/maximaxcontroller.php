@@ -2,18 +2,18 @@
 header('Content-Type: application/json');
 $data = $_POST;
 
+
 // echo $num_mayor = mayor($array_datas);
 // header("Location: ../payoff.php?maximo=$num_mayor");
-$function = $_POST['funcion'];
-$probability = false;
 
-if (isset($data['P'])) {
-    $probability = $data['P'];
-    unset($data['P']);
-}
+// PayOffMatrix
+$function = $_POST['funcion'];
+
 
 unset($data['funcion']);
-$function($data, $probability);
+
+// llama la función PayOffMatrix
+$function($data);
 // sumarize($data);
 
 function sumarize($data, $probability)
@@ -93,6 +93,21 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
         $cont++;
     }
     echo json_encode($matrix_regreat);
+}
+
+
+function holaMundo($data){
+    print_r($data);
+    echo ' hola mundo ';
+    $cont = 0;
+    $cont2 = 5;
+    $sum = $cont+$cont2;
+    $texto = 'hola '.$sum;
+    // echo $texto;
+    $arr[]=1;
+    $arr[]=2;
+    $arr[]=3;
+    print_r($arr);
 }
 
 function PayOffMatrix($data)

@@ -29,6 +29,7 @@
         });
 
         $("#form_matrix_generator").submit(function (event) {
+            // Esto le cambia el comportamiento
             event.preventDefault();
             $.ajax({
                 method: "POST",
