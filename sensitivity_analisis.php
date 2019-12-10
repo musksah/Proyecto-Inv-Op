@@ -65,6 +65,14 @@
           </div>
         </div>
       </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
     </ul>
     <!-- End of Sidebar -->
 
@@ -342,7 +350,7 @@
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>          
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
         <script src="js/main.js"></script>

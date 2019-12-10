@@ -35,6 +35,8 @@
                 url: "controllers/maximaxcontroller.php",
                 data: $(this).serialize()
             }).done(function (data) {
+                console.log(data);
+                
                 $("#card-body-payoff-matrix").html(data);
             });
         });
