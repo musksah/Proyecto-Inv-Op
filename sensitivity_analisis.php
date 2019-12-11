@@ -53,15 +53,24 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Metodos Probabilísticos</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Metodos:</h6>
+            <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
+          </div>
+        </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-table"></i>
-          <span>Metodos de desición</span>
+          <i class="fas fa-fw fa-table"></i>
+          <span>Metodos No Probabilísticos</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Metodos:</h6>
-            <a class="collapse-item" href="payoff.php">MaxiMin</a>
-            <a class="collapse-item" href="cards.html">Sensibility Analysis</a>
+            <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
           </div>
         </div>
       </li>
@@ -130,7 +139,7 @@
                   </div>
                   <div class="card-body">
                     <form action="controllers/maximaxcontroller.php" method="POST" id="form_matrix_generator">
-                      <input type="hidden" name="funcion" value="holaMundo">
+                      <input type="hidden" name="funcion" value="PayOffMatrix">
                       <div class="row">
                         <!-- <div class="col-md-6">
                           <label for=""></label>  
@@ -167,10 +176,23 @@
                     <h6 class="m-0 font-weight-bold text-primary">PayOff Matrix</h6>
                   </div>
                   <div class="card-body" id="card-body-payoff-matrix">
+
                   </div>
                 </div>
               </div>
-  
+
+              <div class="col-md-12">
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Sensibility Analysis</h6>
+                  </div>
+                  <div class="card-body" id="matrix_emv">
+
+                  </div>
+                </div>
+              </div>
+
               <!-- /.container-fluid -->
 
             </div>
@@ -225,7 +247,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/sensitivity.js"></script>
 
 </body>
 

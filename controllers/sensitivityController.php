@@ -26,26 +26,58 @@ function sumarize($data, $probability)
     // matrixRegreat($mayor_a, $mayor_b, $data['A'], $data['B']);
 }
 
-function calcEMV($data, $probability){
-    print_r($data);
+function calcEMV($data, $probability)
+{
+    // print_r($data);
     $emv = [];
     foreach ($data as $key => $value) {
         $sum = 0;
-        echo  '  ||  ';
         foreach ($value as $key_col => $value_col) {
+            // echo ' || valor_probability '. $probability[$key_col];
+            // echo ' valor: '.$value_col.' || ';
+            $result = (float) $value_col * $probability[$key_col];
+            $sum = $sum + $result;
             // echo ' '.$value_col.' <br>';
-            $sum = $sum + $value_col;
+            // $sum = $sum + $value_col;
             // echo ' ';
             // print_r($value_col);
-            //    $sum =  $sum+($probability[$key_col]*$value_col);
+            // $sum =  (FLOAT)$sum+($probability[$key_col]*$value_col);
         }
-        echo  '  ||  '. var_dump($sum);
-        
-        // echo ' suma '.$sum;
-        // $emv[$key]=$sum;
+        $data[$key]['EMV'] = $sum;
     }
-    print_r($emv);
+    $table = tableEmv($data);
+}
+
+function tableEmv($data)
+{
+    $headers_col = getHeaders($data['A1']);
+    $table = "<table class='table'>";
     
+    $table.= "<tr>";
+    $table.= "<td> Alternatives Desicion </td>";
+    foreach ($headers_col as $key => $value) {
+        $table.= "<td> <h3> $value </h3> </td>";
+    }
+    $table.= "</tr>";
+    foreach ($data as $key => $value) {
+        $table.= "<tr>";
+        $table.= "<td> $key </td>";
+        foreach ($value as $key_col => $value_col) {
+            $table.= "<td> $value_col </td>";
+        }
+        $table.= "</tr>";
+    }
+    $table.= "<table>";
+    echo json_encode($table);
+}
+
+function getHeaders($data)
+{
+    // unset($data['emv']);
+    foreach ($data as $key => $value) {
+        $headers[] = $key;
+    }
+    return $headers;
 }
 
 function encontrarMayores($data)
@@ -103,20 +135,19 @@ function PayOffMatrix($data)
     <script>
     $("#form_payoff_data").submit(function (event) {
         event.preventDefault();
-        debugger
         $.ajax({
             method: "POST",
-            url: "controllers/maximaxcontroller.php",
+            url: "controllers/sensitivityController.php",
             data: $(this).serialize()
         }).done(function (data) {
             console.log(data);
-            $("#matrix_regreat").html(data);
+            $("#matrix_emv").html(data);
         });
     });
     </script>
     
     <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
-    <input type="hidden" name="funcion" value="sumarize">
+    <input type="hidden" name="funcion" value="calcEMV">
     <div class="table-responsive">
     <table class="table">
       <thead>
