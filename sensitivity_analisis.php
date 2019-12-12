@@ -55,22 +55,25 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-table"></i>
-          <span>Metodos Probabilísticos</span>
+          <span>Probabilistic Methods</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Metodos:</h6>
-            <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
+            <h6 class="collapse-header">Methods:</h6>
+            <a class="collapse-item" href="">Maximax (Optimistic)</a>
+            <a class="collapse-item" href="">Maximin (Pessimistic)</a>
+            <a class="collapse-item" href="">Minimax (Repentance)</a>
           </div>
         </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-table"></i>
-          <span>Metodos No Probabilísticos</span>
+          <span>Non-probabilistic Methods</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Metodos:</h6>
-            <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
+            <a class="collapse-item" href="sensitivity_analisis.php">EMV Sensibility Analysis</a>
+            <a class="collapse-item" href="">EOL</a>
           </div>
         </div>
       </li>
