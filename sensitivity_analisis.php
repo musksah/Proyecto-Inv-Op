@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 
@@ -123,7 +124,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Desicion Methods</h1>
+            <h1 class="h3 mb-0 text-gray-800">Sensitivity Analysis</h1>
           </div>
 
           <div>
@@ -151,14 +152,15 @@
                           <input type="number" min="1" max="15" placeholder="Ingrese un número" class="form-control" name="num_alterns" id="num_alterns" required>
                         </div>
                       </div>
-                      <div class="form-group row" style="margin-top: 30px">
+                      <input type="hidden"  value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                      <!-- <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-4">
                           <label for="num_uncerts">Casos de Incertidumbre:</label>
                         </div>
                         <div class="col-md-8">
                           <input type="number" min="1" max="15" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-12 text-center">
                           <input type="submit" placeholder="Ingrese un número" class="btn btn-primary" value="Generar Matriz">
@@ -193,8 +195,16 @@
                 </div>
               </div>
 
-              <!-- /.container-fluid -->
 
+              <!-- /.container-fluid -->
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h3 class="text-primary">Graphic</h3>
+                  <div id="myDiv">
+                    <!-- Plotly chart will be drawn inside this DIV -->
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- End of Main Content -->
 

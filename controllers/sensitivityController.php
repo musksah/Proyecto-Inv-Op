@@ -2,8 +2,6 @@
 header('Content-Type: application/json');
 $data = $_POST;
 
-// echo $num_mayor = mayor($array_datas);
-// header("Location: ../payoff.php?maximo=$num_mayor");
 $function = $_POST['funcion'];
 $probability = false;
 
@@ -14,61 +12,75 @@ if (isset($data['P'])) {
 
 unset($data['funcion']);
 $function($data, $probability);
-// sumarize($data);
 
-function sumarize($data, $probability)
+function sensitivityAnalisis($data, $probability)
 {
-    // if($probability !== false){
-    //     print_r($probability);
-    //     calcEMV($data, $probability);
-    // }
-    encontrarMayores($data);
-    // matrixRegreat($mayor_a, $mayor_b, $data['A'], $data['B']);
+    $data_graphic = dataGraphic($data);
+    echo json_encode($data_graphic);
 }
 
 function calcEMV($data, $probability)
 {
-    // print_r($data);
-    $emv = [];
     foreach ($data as $key => $value) {
         $sum = 0;
         foreach ($value as $key_col => $value_col) {
-            // echo ' || valor_probability '. $probability[$key_col];
-            // echo ' valor: '.$value_col.' || ';
             $result = (float) $value_col * $probability[$key_col];
             $sum = $sum + $result;
-            // echo ' '.$value_col.' <br>';
-            // $sum = $sum + $value_col;
-            // echo ' ';
-            // print_r($value_col);
-            // $sum =  (FLOAT)$sum+($probability[$key_col]*$value_col);
         }
+        $emv[$key]=$sum;
         $data[$key]['EMV'] = $sum;
     }
-    $table = tableEmv($data);
+    return $emv;
 }
 
 function tableEmv($data)
 {
     $headers_col = getHeaders($data['A1']);
     $table = "<table class='table'>";
-    
-    $table.= "<tr>";
-    $table.= "<td> Alternatives Desicion </td>";
+
+    $table .= "<tr>";
+    $table .= "<td> Alternatives Desicion </td>";
     foreach ($headers_col as $key => $value) {
-        $table.= "<td> <h3> $value </h3> </td>";
+        $table .= "<td> <h3> $value </h3> </td>";
     }
-    $table.= "</tr>";
+    $table .= "</tr>";
     foreach ($data as $key => $value) {
-        $table.= "<tr>";
-        $table.= "<td> $key </td>";
+        $table .= "<tr>";
+        $table .= "<td> $key </td>";
         foreach ($value as $key_col => $value_col) {
-            $table.= "<td> $value_col </td>";
+            $table .= "<td> $value_col </td>";
         }
-        $table.= "</tr>";
+        $table .= "</tr>";
     }
-    $table.= "<table>";
-    echo json_encode($table);
+    $table .= "<table>";
+    return $table;
+}
+
+function dataGraphic($data)
+{
+    $headers_col = getHeaders($data['A1']);
+    unset($headers_col['EMV']);
+    $prob=[];
+    $probalities=[];
+    for ($i = 0; $i <11; $i++) {
+        $pro = array();
+        $prob1 = $i/10;   
+        $probalities[] = $i/10;   
+        $pro[] = $prob1;
+        $pro[] = 1 - $prob1;
+        foreach ($headers_col as $key_col => $value_col) {
+            $prob[$value_col]=$pro[$key_col];
+        }
+        $emv_arr[]=calcEMV($data,$prob);
+    }
+    // Se arregla el array para la gráfica
+    $cont=0;
+    foreach ($data as $key => $value) { 
+        $plot[$cont]['y'] = array_column($emv_arr, $key);       
+        $plot[$cont]['x'] = $probalities;
+        $cont++;       
+    }
+    return $plot;
 }
 
 function getHeaders($data)
@@ -141,13 +153,14 @@ function PayOffMatrix($data)
             data: $(this).serialize()
         }).done(function (data) {
             console.log(data);
-            $("#matrix_emv").html(data);
+            var layout = {};
+            Plotly.newPlot("myDiv", data, layout, { showSendToCloud: true });
         });
     });
     </script>
     
     <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
-    <input type="hidden" name="funcion" value="calcEMV">
+    <input type="hidden" name="funcion" value="sensitivityAnalisis">
     <div class="table-responsive">
     <table class="table">
       <thead>
