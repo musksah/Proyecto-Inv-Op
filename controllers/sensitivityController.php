@@ -58,7 +58,7 @@ function tableEmv($data)
 
 function dataGraphic($data)
 {
-    $headers_col = getHeaders($data['A1']);
+    $headers_col = getHeaders($data['Alternative1']);
     unset($headers_col['EMV']);
     $prob=[];
     $probalities=[];
@@ -78,8 +78,11 @@ function dataGraphic($data)
     foreach ($data as $key => $value) { 
         $plot[$cont]['y'] = array_column($emv_arr, $key);       
         $plot[$cont]['x'] = $probalities;
+        $plot[$cont]['mode'] = "lines+markers";
+        $plot[$cont]['name'] = $key;
         $cont++;       
     }
+    
     return $plot;
 }
 
@@ -186,7 +189,7 @@ function PayOffMatrix($data)
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='A" . $i . "[U" . $j . "]' placeholder='Enter Number' name='A" . $i . "[U" . $j . "]'>
+                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
                 </div>
             </td>";
         }
