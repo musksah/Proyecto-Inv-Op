@@ -11,7 +11,16 @@ $function($data);
 
 function sensitivityAnalisis($data)
 {
-    $data_graphic = dataGraphic($data);
+    $data_matrix = $data['data'];
+    if (!empty($data['name_alternative'])) {
+        $names = $data['name_alternative'];
+        $data_graphic = dataGraphic($data_matrix, $names);
+        $data_graphic = getNamesAlternatives($names, $data_graphic);
+    } else {
+        $data_graphic = dataGraphic($data_matrix);
+    }
+    // print_r($data_graphic);
+    // die;
     echo json_encode($data_graphic);
 }
 
@@ -27,6 +36,18 @@ function calcEMV($data, $probability)
         $data[$key]['EMV'] = $sum;
     }
     return $emv;
+}
+
+function getNamesAlternatives($name_alternatives, $data_graphic)
+{
+    $balanced = $data_graphic['balanced'];
+    for ($i = 0; $i < count($balanced); $i++) {
+        foreach ($name_alternatives as $key => $value) {
+            $new_balanced[$i] = $name_alternatives[$balanced[$i]];
+        }
+    }
+    $data_graphic['balanced'] = $new_balanced;
+    return $data_graphic;
 }
 
 function tableEmv($data)
@@ -52,7 +73,7 @@ function tableEmv($data)
     return $table;
 }
 
-function dataGraphic($data)
+function dataGraphic($data, $names = false)
 {
     $headers_col = getHeaders($data['Alternative1']);
     unset($headers_col['EMV']);
@@ -70,18 +91,19 @@ function dataGraphic($data)
         $emv_arr[] = calcEMV($data, $prob);
     }
     $arr_balanced = getAlternativeOver0($emv_arr);
-    // Se arregla el array para la gráfica
-    // print_r($emv_arr);
-    // die;
     $cont = 0;
     foreach ($data as $key => $value) {
         $plot[$cont]['y'] = array_column($emv_arr, $key);
         $plot[$cont]['x'] = $probalities;
         $plot[$cont]['mode'] = "lines+markers";
-        $plot[$cont]['name'] = $key;
+        if ($names !== false) {
+            $plot[$cont]['name'] = $names[$key];
+        } else {
+            $plot[$cont]['name'] = $key;
+        }
         $cont++;
     }
-    
+
     return ['plot' => $plot, 'balanced' => $arr_balanced['balanced_alternatives']];
 }
 
@@ -108,15 +130,12 @@ function getAlternativeOver0($data)
         }
     }
     $mayor_positive = max($positive_arr);
-    // print_r($positive_arr);
-    // print_r($mayor_positive);
-    // die;
     foreach ($positive_arr as $key => $value) {
-        if($value == $mayor_positive){
+        if ($value == $mayor_positive) {
             $balanced_alternatives[] = $key;
         }
     }
-    return ['positive' => $mayor_positive, 'negative' => $negative_arr,'balanced_alternatives'=>$balanced_alternatives];
+    return ['positive' => $mayor_positive, 'negative' => $negative_arr, 'balanced_alternatives' => $balanced_alternatives];
 }
 
 
@@ -177,6 +196,9 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
 
 function PayOffMatrix($data)
 {
+    if (!empty($data['alternative'])) {
+        $alternatives_name = $data['alternative'];
+    }
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
     $table_form = '
@@ -193,7 +215,7 @@ function PayOffMatrix($data)
             Plotly.newPlot("myDiv", data.plot, layout, { showSendToCloud: true });
             let texthtml = "";
             $.each( data.balanced, function( key, value ) {
-                texthtml = texthtml + "<p>"+ value +"</p></br>";
+                texthtml = texthtml + "<p>"+ value +"</p>";
             });
             $("#balanced_analisys").html(texthtml)
         });
@@ -220,19 +242,24 @@ function PayOffMatrix($data)
     for ($i = 1; $i < $rows + 1; $i++) {
         $table_form .= "
         <tr> 
-            <td class='text-center'>
-                <h3>alternative" . $i . "</h3>
-                </td>";
+            <td class='text-center'>";
+        if (!empty($data['alternative'])) {
+            $alternatives_name = $data['alternative'];
+            $table_form .= "<h3>" . $alternatives_name[$i - 1] . "</h3></td>";
+        } else {
+            $table_form .= "<h3>Alternative" . $i . "</h3></td>";
+        }
         for ($j = 1; $j < $colums + 1; $j++) {
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
-                </div>
-            </td>";
+                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='data[Alternative" . $i . "][U" . $j . "]'>";
+                    if (!empty($data['alternative'])) {
+                        $table_form .= "<input type='hidden' class='form-control' id='name_alternative[Alternative" . $i . "]' name='name_alternative[Alternative" . $i . "]' value='" . $alternatives_name[$i - 1] . "'>";
+                    }
+           $table_form .="</div></td>";
         }
-        $table_form .= "
-        </tr>";
+        $table_form .= "</tr>";
     }
 
     $table_form .= "
