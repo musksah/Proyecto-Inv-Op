@@ -5,15 +5,11 @@ $data = $_POST;
 $function = $_POST['funcion'];
 $probability = false;
 
-if (isset($data['P'])) {
-    $probability = $data['P'];
-    unset($data['P']);
-}
 
 unset($data['funcion']);
-$function($data, $probability);
+$function($data);
 
-function sensitivityAnalisis($data, $probability)
+function sensitivityAnalisis($data)
 {
     $data_graphic = dataGraphic($data);
     echo json_encode($data_graphic);
@@ -27,7 +23,7 @@ function calcEMV($data, $probability)
             $result = (float) $value_col * $probability[$key_col];
             $sum = $sum + $result;
         }
-        $emv[$key]=$sum;
+        $emv[$key] = $sum;
         $data[$key]['EMV'] = $sum;
     }
     return $emv;
@@ -60,35 +56,72 @@ function dataGraphic($data)
 {
     $headers_col = getHeaders($data['Alternative1']);
     unset($headers_col['EMV']);
-    $prob=[];
-    $probalities=[];
-    for ($i = 0; $i <11; $i++) {
+    $prob = [];
+    $probalities = [];
+    for ($i = 0; $i < 11; $i++) {
         $pro = array();
-        $prob1 = $i/10;   
-        $probalities[] = $i/10;   
+        $prob1 = $i / 10;
+        $probalities[] = $i / 10;
         $pro[] = $prob1;
         $pro[] = 1 - $prob1;
         foreach ($headers_col as $key_col => $value_col) {
-            $prob[$value_col]=$pro[$key_col];
+            $prob[$value_col] = $pro[$key_col];
         }
-        $emv_arr[]=calcEMV($data,$prob);
+        $emv_arr[] = calcEMV($data, $prob);
     }
+    $arr_balanced = getAlternativeOver0($emv_arr);
     // Se arregla el array para la gráfica
-    $cont=0;
-    foreach ($data as $key => $value) { 
-        $plot[$cont]['y'] = array_column($emv_arr, $key);       
+    // print_r($emv_arr);
+    // die;
+    $cont = 0;
+    foreach ($data as $key => $value) {
+        $plot[$cont]['y'] = array_column($emv_arr, $key);
         $plot[$cont]['x'] = $probalities;
         $plot[$cont]['mode'] = "lines+markers";
         $plot[$cont]['name'] = $key;
-        $cont++;       
+        $cont++;
     }
     
-    return $plot;
+    return ['plot' => $plot, 'balanced' => $arr_balanced['balanced_alternatives']];
 }
+
+function init0Array($data)
+{
+    $ceros = [];
+    foreach ($data as $key => $value) {
+        $ceros[$key] = 0;
+    }
+    return $ceros;
+}
+function getAlternativeOver0($data)
+{
+    $positive_arr = init0Array($data[0]);
+    $negative_arr = init0Array($data[0]);
+    foreach ($data as $key => $value) {
+        foreach ($value as $key_col => $value_col) {
+            if ($value_col > 0) {
+                $positive_arr[$key_col] = $positive_arr[$key_col] + 1;
+            }
+            if ($value_col < 0) {
+                $negative_arr[$key_col] = $negative_arr[$key_col] + 1;
+            }
+        }
+    }
+    $mayor_positive = max($positive_arr);
+    // print_r($positive_arr);
+    // print_r($mayor_positive);
+    // die;
+    foreach ($positive_arr as $key => $value) {
+        if($value == $mayor_positive){
+            $balanced_alternatives[] = $key;
+        }
+    }
+    return ['positive' => $mayor_positive, 'negative' => $negative_arr,'balanced_alternatives'=>$balanced_alternatives];
+}
+
 
 function getHeaders($data)
 {
-    // unset($data['emv']);
     foreach ($data as $key => $value) {
         $headers[] = $key;
     }
@@ -157,7 +190,12 @@ function PayOffMatrix($data)
         }).done(function (data) {
             console.log(data);
             var layout = {};
-            Plotly.newPlot("myDiv", data, layout, { showSendToCloud: true });
+            Plotly.newPlot("myDiv", data.plot, layout, { showSendToCloud: true });
+            let texthtml = "";
+            $.each( data.balanced, function( key, value ) {
+                texthtml = texthtml + "<p>"+ value +"</p></br>";
+            });
+            $("#balanced_analisys").html(texthtml)
         });
     });
     </script>
@@ -173,7 +211,7 @@ function PayOffMatrix($data)
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col">
-                <h3 class="text-center">U' . $j . '</h3>
+                <h3 class="text-center">Evento' . $j . '</h3>
             </th>';
     }
     $table_form .= "</thead><tbody>";
@@ -196,15 +234,7 @@ function PayOffMatrix($data)
         $table_form .= "
         </tr>";
     }
-    $table_form .= "<tr><td><h3 class='text-center'>Probability</h3></td>";
-    for ($i = 1; $i < $colums + 1; $i++) {
-        $table_form .= "<td>
-        <div class='form-group'>
-            <input type='text' class='form-control' id='P" . "[U" . $i . "]' placeholder='Enter Number' name='P" . "[U" . $i . "]'>
-        </div>
-        </td>";
-    }
-    $table_form .= "</tr>";
+
     $table_form .= "
             </tbody>
         </table>

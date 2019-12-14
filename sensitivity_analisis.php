@@ -155,7 +155,7 @@
                           <input type="number" min="1" max="15" placeholder="Ingrese un número" class="form-control" name="num_alterns" id="num_alterns" required>
                         </div>
                       </div>
-                      <input type="hidden"  value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                      <input type="hidden" value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
                       <!-- <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-4">
                           <label for="num_uncerts">Casos de Incertidumbre:</label>
@@ -205,6 +205,19 @@
                   <h3 class="text-primary">Graphic</h3>
                   <div id="myDiv">
                     <!-- Plotly chart will be drawn inside this DIV -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <!-- Default Card Example -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Analysis</h6>
+                  </div>
+                  <div class="card-body">
+                      <p>Si se desea tomar un desición estable la mejor alternativa(as) es(son): </p>
+                      <span id="balanced_analisys"></span>
                   </div>
                 </div>
               </div>
