@@ -72,7 +72,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Metodos:</h6>
                         <a class="collapse-item" href="maximax.php">MaxiMax</a>
-                        <a class="collapse-item" href="maximax.php">MaxiMin</a>
+                        <a class="collapse-item" href="maximin.php">MaxiMin</a>
                       
                     </div>
                 </div>

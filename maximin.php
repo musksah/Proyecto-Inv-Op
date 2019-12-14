@@ -73,6 +73,7 @@
             <h6 class="collapse-header">Metodos:</h6>
             <a class="collapse-item" href="maximax.php">MaxiMax</a>
             <a class="collapse-item" href="maximin.php">MaxiMin</a>
+           
           </div>
         </div>
       </li>
@@ -188,7 +189,7 @@
                 <!-- Default Card Example -->
                 <div class="card mb-4">
                   <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Maximax</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Maximin</h6>
                   </div>
                   <div class="card-body" id="matrix_max">
 
@@ -203,8 +204,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Result</h6>
                   </div>
                   <div class="card-body">
-                    <label>The maximum is:</label>
-                    <span id="maximo"> </span>
+                  <label >The minimum is:</label>
+                    <span id="minimo"> </span>
                   </div>
 
                 </div>
@@ -265,7 +266,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
-        <script src="js/maximax.js"></script>
+        <script src="js/maximin.js"></script> 
 
 </body>
 
