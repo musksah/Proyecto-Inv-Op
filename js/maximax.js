@@ -33,7 +33,7 @@
             event.preventDefault();
             $.ajax({
                 method: "POST",
-                url: "controllers/maximaxcontroller.php",
+                url: "controllers/maximaxController.php",
                 data: $(this).serialize()
             }).done(function (data) {
                 console.log(data);

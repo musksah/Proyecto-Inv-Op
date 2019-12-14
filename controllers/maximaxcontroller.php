@@ -2,83 +2,57 @@
 header('Content-Type: application/json');
 $data = $_POST;
 
-
-// echo $num_mayor = mayor($array_datas);
-// header("Location: ../payoff.php?maximo=$num_mayor");
-
-// PayOffMatrix
 $function = $_POST['funcion'];
 
-
 unset($data['funcion']);
-
-// llama la función PayOffMatrix
 $function($data);
-// sumarize($data);
 
-function sumarize($data, $probability)
+function getHeaders($data)
 {
-    // if($probability !== false){
-    //     print_r($probability);
-    //     calcEMV($data, $probability);
-    // }
-    encontrarMayores($data);
-    // matrixRegreat($mayor_a, $mayor_b, $data['A'], $data['B']);
-}
-
-function calcEMV($data, $probability){
-    print_r($data);
-    $emv = [];
-    foreach ($data as $key => $value) {
-        $sum = 0;
-        echo  '  ||  ';
-        foreach ($value as $key_col => $value_col) {
-            // echo ' '.$value_col.' <br>';
-            $sum = $sum + $value_col;
-            // echo ' ';
-            // print_r($value_col);
-            //    $sum =  $sum+($probability[$key_col]*$value_col);
-        }
-        echo  '  ||  '. var_dump($sum);
-        
-        // echo ' suma '.$sum;
-        // $emv[$key]=$sum;
+    foreach ($data['Alternative1'] as $keycol => $valuecol) {
+        $headers[] = $keycol;
     }
-    print_r($emv);
-    
+    return $headers;
 }
 
 function encontrarMayores($data)
 {
-    $mayores = [];
-    $index = [];
-    foreach ($data as $key => $value_index) {
-        foreach ($value_index as $key => $value) {
-            $index[$key] = $key;
-        }
+    $datost = " ";
+    $datostr = " ";
+
+    $headers = getHeaders($data);
+
+    $datostr .= "<br>";
+    $datost = '
+    <div class="table-responsive">
+    <table class="table">';
+
+    $datost .= '<thead><tr>';
+    foreach ($headers as $key => $value) {
+        $datost .= ' <th scope="col" class="text-center">' . $value . ' </th>';
     }
-    foreach ($index as $key => $value) {
-        $mayores_arr[$key] = array_column($data, $value);
-    }
-    foreach ($mayores_arr as $key => $value) {
-        $mayores[$key] = mayor($value);
-    }
+    $datost .= ' <th scope="col" class="text-center">Máximo</th>';
+    $datost .= '</tr></thead><tbody>';
+
 
     foreach ($data as $key => $value) {
-        foreach ($value as $key_col => $value_col) {
-            $result[$key][] = $mayores[$key_col] - $value_col;
+        $datost .= "<tr>";
+        foreach ($value as $keycol => $valuecol) {
+            //echo" ";
+            $datost .= "<td><center>$valuecol</center></td>";
         }
+        $maximo = max($value);
+        $maximos[]=$maximo;
+        $datost .= "<td><center>$maximo</center></td>";
+        $datost .= '</tr>';
     }
-    $table = "<div class='table-responsive'><table class='table'>";
-    foreach ($result as $key => $value) {
-        $table .= "<tr>";
-        foreach ($value as $key_col => $value_col) {
-            $table .= "<td>" . $value_col . "</td>";
-        }
-        $table .= "</tr>";
-    }
-    $table .= "</table></div>";
-    echo json_encode($table);
+
+    $datost .= '
+        </tbody>
+       
+    </table>                                                                                                                                                                                                                    
+    </div>';
+    echo json_encode(['datost'=>$datost,'maximo'=>max($maximos)]);
 }
 
 function matrixRegreat($mayor_a, $mayor_b, $a, $b)
@@ -95,21 +69,6 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
     echo json_encode($matrix_regreat);
 }
 
-
-function holaMundo($data){
-    print_r($data);
-    echo ' hola mundo ';
-    $cont = 0;
-    $cont2 = 5;
-    $sum = $cont+$cont2;
-    $texto = 'hola '.$sum;
-    // echo $texto;
-    $arr[]=1;
-    $arr[]=2;
-    $arr[]=3;
-    print_r($arr);
-}
-
 function PayOffMatrix($data)
 {
     $rows = $data['num_alterns'];
@@ -118,20 +77,20 @@ function PayOffMatrix($data)
     <script>
     $("#form_payoff_data").submit(function (event) {
         event.preventDefault();
-        debugger
         $.ajax({
             method: "POST",
-            url: "controllers/maximaxcontroller.php",
+            url: "controllers/maximaxController.php",
             data: $(this).serialize()
         }).done(function (data) {
+            $("#matrix_max").html(data.datost);
+            $("#maximo").html(data.maximo);
             console.log(data);
-            $("#matrix_regreat").html(data);
         });
     });
     </script>
     
     <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
-    <input type="hidden" name="funcion" value="sumarize">
+    <input type="hidden" name="funcion" value="encontrarMayores">
     <div class="table-responsive">
     <table class="table">
       <thead>
@@ -157,22 +116,14 @@ function PayOffMatrix($data)
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='A" . $i . "[U" . $j . "]' placeholder='Enter Number' name='A" . $i . "[U" . $j . "]'>
+                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
                 </div>
             </td>";
         }
         $table_form .= "
         </tr>";
     }
-    $table_form .= "<tr><td><h3 class='text-center'>Probability</h3></td>";
-    for ($i = 1; $i < $colums + 1; $i++) {
-        $table_form .= "<td>
-        <div class='form-group'>
-            <input type='text' class='form-control' id='P" . "[U" . $i . "]' placeholder='Enter Number' name='P" . "[U" . $i . "]'>
-        </div>
-        </td>";
-    }
-    $table_form .= "</tr>";
+
     $table_form .= "
             </tbody>
         </table>
@@ -182,26 +133,4 @@ function PayOffMatrix($data)
         </div>
     </form>";
     echo json_encode($table_form);
-}
-
-function mayor($data)
-{
-    $mayor = 0;
-    foreach ($data as $key => $value) {
-        if ($mayor < $value) {
-            $mayor = $value;
-        }
-    }
-    return $mayor;
-}
-
-function minor($data)
-{
-    $menor = 0;
-    foreach ($data as $key => $value) {
-        if ($menor < $value) {
-            $menor = $value;
-        }
-    }
-    return $menor;
 }

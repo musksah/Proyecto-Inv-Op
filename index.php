@@ -66,11 +66,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Metodos No Probabilísticos</span>
+    
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Metodos:</h6>
-                        <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
+                        <a class="collapse-item" href="maximax.php">MaxiMax</a>
+                        <a class="collapse-item" href="maximax.php">MaxiMin</a>
+                      
                     </div>
                 </div>
             </li>
