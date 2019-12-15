@@ -72,6 +72,9 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
 
 function PayOffMatrix($data)
 {
+    if (!empty($data['alternative'])) {
+        $alternatives_name = $data['alternative'];
+    }
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
     $table_form = '
@@ -86,11 +89,12 @@ function PayOffMatrix($data)
             $("#matrix_max").html(data.datost);
             $("#minimo").html(data.minimo);
             console.log(data);
+           
         });
     });
     </script>
     
-    <form action="controllers/maximincontroller.php" method="POST" id="form_payoff_data">
+    <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
     <input type="hidden" name="funcion" value="encontrarMayores">
     <div class="table-responsive">
     <table class="table">
@@ -101,7 +105,7 @@ function PayOffMatrix($data)
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col">
-                <h3 class="text-center">U' . $j . '</h3>
+                <h3 class="text-center">Evento' . $j . '</h3>
             </th>';
     }
     $table_form .= "</thead><tbody>";
@@ -110,19 +114,24 @@ function PayOffMatrix($data)
     for ($i = 1; $i < $rows + 1; $i++) {
         $table_form .= "
         <tr> 
-            <td class='text-center'>
-                <h3>alternative" . $i . "</h3>
-                </td>";
+            <td class='text-center'>";
+        if (!empty($data['alternative'])) {
+            $alternatives_name = $data['alternative'];
+            $table_form .= "<h3>" . $alternatives_name[$i - 1] . "</h3></td>";
+        } else {
+            $table_form .= "<h3>Alternative" . $i . "</h3></td>";
+        }
         for ($j = 1; $j < $colums + 1; $j++) {
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
-                </div>
-            </td>";
+                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='data[Alternative" . $i . "][U" . $j . "]'>";
+                    if (!empty($data['alternative'])) {
+                        $table_form .= "<input type='hidden' class='form-control' id='name_alternative[Alternative" . $i . "]' name='name_alternative[Alternative" . $i . "]' value='" . $alternatives_name[$i - 1] . "'>";
+                    }
+           $table_form .="</div></td>";
         }
-        $table_form .= "
-        </tr>";
+        $table_form .= "</tr>";
     }
 
     $table_form .= "
@@ -135,3 +144,4 @@ function PayOffMatrix($data)
     </form>";
     echo json_encode($table_form);
 }
+    

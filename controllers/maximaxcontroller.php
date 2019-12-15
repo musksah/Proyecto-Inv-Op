@@ -25,25 +25,28 @@ function encontrarMayores($data)
     $datostr .= "<br>";
     $datost = '
     <div class="table-responsive">
-    <table class="table">';
+    <table class="table table-striped">';
 
-    $datost .= '<thead><tr>';
+    $datost .= '<thead h4 class="bg-secondary text-white"><tr>';
+    $datost .= "<td><h4><center>Alternatives Decision</center></h3></td>";
     foreach ($headers as $key => $value) {
-        $datost .= ' <th scope="col" class="text-center">' . $value . ' </th>';
+        $datost .= ' <th scope="col" class="text-center"><h4>' . $value . ' </h3></th>';
     }
-    $datost .= ' <th scope="col" class="text-center">Máximo</th>';
+    $datost .= ' <th scope="col" class="text-center"><h3>Maximum</h3></th>';
     $datost .= '</tr></thead><tbody>';
 
 
     foreach ($data as $key => $value) {
         $datost .= "<tr>";
+        $datost .= "<td><h4><center>$key</center></h4></td>";
         foreach ($value as $keycol => $valuecol) {
             //echo" ";
-            $datost .= "<td><center>$valuecol</center></td>";
+            $datost .= "<td><h5><center>$valuecol</center></h5></td>";
+           
         }
         $maximo = max($value);
-        $maximos[]=$maximo;
-        $datost .= "<td><center>$maximo</center></td>";
+        $maximos[]=$key." with ".$maximo;
+        $datost .= "<td><h6><center>$maximo</center></h6></td>";
         $datost .= '</tr>';
     }
 
@@ -71,6 +74,9 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
 
 function PayOffMatrix($data)
 {
+    if (!empty($data['alternative'])) {
+        $alternatives_name = $data['alternative'];
+    }
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
     $table_form = '
@@ -84,6 +90,7 @@ function PayOffMatrix($data)
         }).done(function (data) {
             $("#matrix_max").html(data.datost);
             $("#maximo").html(data.maximo);
+            
             console.log(data);
         });
     });
@@ -92,15 +99,15 @@ function PayOffMatrix($data)
     <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
     <input type="hidden" name="funcion" value="encontrarMayores">
     <div class="table-responsive">
-    <table class="table">
-      <thead>
+    <table class="table table-striped">
+      <thead class="bg-secondary text-white" >
         <tr>
-          <th scope="col" class="text-center">Alternatives Desicion</th>';
+          <th  scope="col" class="text-center"><h4>Alternatives Decision</h4></th>';
 
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col">
-                <h3 class="text-center">U' . $j . '</h3>
+                <h4 class="text-center">U' . $j . '</h4>
             </th>';
     }
     $table_form .= "</thead><tbody>";
@@ -110,13 +117,13 @@ function PayOffMatrix($data)
         $table_form .= "
         <tr> 
             <td class='text-center'>
-                <h3>alternative" . $i . "</h3>
+                <h4>Alternative" . $i . "</h4>
                 </td>";
         for ($j = 1; $j < $colums + 1; $j++) {
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
+                    <input h4 type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
                 </div>
             </td>";
         }
@@ -129,8 +136,11 @@ function PayOffMatrix($data)
         </table>
         </div>
         <div class='form-group'>
-            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calcular</button>
+            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calculate</button>
         </div>
     </form>";
     echo json_encode($table_form);
+
 }
+
+    
