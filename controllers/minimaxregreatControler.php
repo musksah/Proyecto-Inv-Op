@@ -147,7 +147,7 @@ function generateMatrixRegreat($data, $names = false)
     foreach ($data as $key => $value) {
         $maximo_regreat[$key] = max($value);
         foreach ($value as $keycol => $valuecol) {
-            $data[$key]['maximo'] = $maximo_regreat[$key];
+            $data[$key]['Maximum'] = $maximo_regreat[$key];
         }
     }
     $min = min($maximo_regreat);
@@ -237,7 +237,7 @@ function PayOffMatrix($data)
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col" class="bg-secondary text-white">
-                <h3 class="text-center">Evento' . $j . '</h3>
+                <h3 class="text-center">Event' . $j . '</h3>
             </th>';
     }
     $table_form .= "</tr></thead><tbody>";
@@ -271,7 +271,7 @@ function PayOffMatrix($data)
         </table>
         </div>
         <div class='form-group'>
-            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calcular</button>
+            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calculate</button>
         </div>
     </form>";
     echo json_encode($table_form);

@@ -15,7 +15,7 @@
             var table_alternatives = "";
             if(this.checked) {
                 let alternatives = parseInt($("#num_alterns").val());
-                table_alternatives = '<hr class="sidebar-divider my-0"> <h4 class="text-center text-primary" style="text-decoration:underline; margin-bottom: 25px; margin-top: 20px;">Customize Alternatives</h4>';
+                table_alternatives = '<hr class="sidebar-divider my-0"> <h4 class="text-center text-primary" style="text-decoration:underline; margin-bottom: 25px; margin-top: 20px;">Customize Alternatives </h4>';
                 for (let index = 0; index < alternatives; index++) {
                     table_alternatives = table_alternatives+ ''+ 
                     '<div class="row">'+

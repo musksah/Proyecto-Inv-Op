@@ -233,7 +233,7 @@ function PayOffMatrix($data)
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col">
-                <h4 class="text-center">Evento' . $j . '</h4>
+                <h4 class="text-center">Event' . $j . '</h4>
             </th>';
     }
     $table_form .= "</thead><tbody>";

@@ -114,6 +114,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Result</h6>
                   </div>
                   <div class="card-body" class="text-info">
+                  <h4 class="text-info">Alternatives</h4>
                   <p>The alternative (s) with the maximum payment is (are):</p>
                     <span id="maximo"> </span>
                   </div>

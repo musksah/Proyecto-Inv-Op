@@ -63,7 +63,7 @@
                           </div>
                         </div>
                       </div>
-                      <input type="hidden" value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                      <input type="hidden" value="2" placeholder="Enter a number" class="form-control" name="num_uncerts" id="num_uncerts" required>
                       <!-- <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-4">
                           <label for="num_uncerts">Casos de Incertidumbre:</label>

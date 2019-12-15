@@ -24,7 +24,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sensitivity Analysis</h1>
+            <h1 class="h3 mb-0 text-gray-800">Maximin Decision</h1>
           </div>
 
           <div>
@@ -46,24 +46,36 @@
                           <label for=""></label>  
                         </div> -->
                         <div class="col-md-4" style="margin-top: 10px">
-                          <label for="num_alterns">Cantidad de Alternativas:</label>
+                          <label for="num_alterns">Number of alternatives:</label>
                         </div>
                         <div class="col-md-8">
-                          <input type="number" min="2" max="15" placeholder="Ingrese un número" class="form-control" name="num_alterns" id="num_alterns" required>
+                          <input type="number" min="2" max="15" placeholder="Enter a number" class="form-control" name="num_alterns" id="num_alterns" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4" style="margin-top: 10px">
+                        </div>
+                        <div class="col-md-8" style="margin-top: 10px">
+                          <div class="form-check">
+                            <input type="checkbox" name="customized_alternatives" id="customized_alternatives">
+                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Customize alternatives</label>
+                          </div>
                         </div>
                       </div>
                       <!-- <input type="hidden"  value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required> -->
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-4">
-                          <label for="num_uncerts">Casos de Incertidumbre:</label>
+                          <label for="num_uncerts">Uncertainty Cases:</label>
                         </div>
                         <div class="col-md-8">
-                          <input type="number" min="2" max="10" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                          <input type="number" min="2" max="10" placeholder="Enter a number" class="form-control" name="num_uncerts" id="num_uncerts" required>
                         </div>
+                      </div>
+                      <div id="div-name-alternatives">
                       </div>
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-12 text-center">
-                          <input type="submit" placeholder="Ingrese un número" class="btn btn-primary" value="Generar Matriz">
+                          <input type="submit" placeholder="Enter a number" class="btn btn-primary" value="Generate Matrix">
                         </div>
                       </div>
                     </form>
@@ -82,7 +94,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="col-md-12">
                 <!-- Default Card Example -->
                 <div class="card mb-4">
@@ -101,8 +112,9 @@
                   <div class="card-header">
                     <h6 class="m-0 font-weight-bold text-primary">Result</h6>
                   </div>
-                  <div class="card-body">
-                    <label>The minimum is:</label>
+                  <div class="card-body" >
+                  <h4 class="text-info">Alternatives</h4>
+                    <p>The largest minimum payment is (are):</p>
                     <span id="minimo"> </span>
                   </div>
 

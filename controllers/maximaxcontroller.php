@@ -22,7 +22,7 @@ function encontrarMayores($data)
 
     $headers = getHeaders($data);
 
-    //$datostr .= "<br>";
+    $datostr .= "<br>";
     $datost = '
     <div class="table-responsive">
     <table class="table table-striped">';
@@ -80,7 +80,7 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
 function PayOffMatrix($data)
 {
     if (!empty($data['alternative'])) {
-        $alternatives_name = $data['alternative'];
+     $alternatives_name= $data['alternative'];
     }
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
@@ -150,5 +150,6 @@ function PayOffMatrix($data)
     echo json_encode($table_form);
 
 }
+
 
     
