@@ -35,7 +35,6 @@ function encontrarMayores($data)
     $datost .= ' <th scope="col" class="text-center"><h3>Maximum</h3></th>';
     $datost .= '</tr></thead><tbody>';
 
-
     foreach ($data as $key => $value) {
         $datost .= "<tr>";
         $datost .= "<td><h4><center>$key</center></h4></td>";
@@ -45,7 +44,7 @@ function encontrarMayores($data)
            
         }
         $maximo = max($value);
-        $maximos[]=$key." with ".$maximo;
+        $maximos[$key] = $maximo;
         $datost .= "<td><h6><center>$maximo</center></h6></td>";
         $datost .= '</tr>';
     }
@@ -55,7 +54,13 @@ function encontrarMayores($data)
        
     </table>                                                                                                                                                                                                                    
     </div>';
-    echo json_encode(['datost'=>$datost,'maximo'=>max($maximos)]);
+    $maximo_maximos = max($maximos);
+    foreach ($maximos as $key => $value) {
+        if($maximo_maximos == $value){
+            $result_maximos[] = $key; 
+        }
+    }
+    echo json_encode(['datost'=>$datost,'maximos'=>$result_maximos]);
 }
 
 function matrixRegreat($mayor_a, $mayor_b, $a, $b)
@@ -88,10 +93,13 @@ function PayOffMatrix($data)
             url: "controllers/maximaxController.php",
             data: $(this).serialize()
         }).done(function (data) {
-            $("#matrix_max").html(data.datost);
-            $("#maximo").html(data.maximo);
-            
             console.log(data);
+            $("#matrix_max").html(data.datost);
+            let cadena = "";
+            $.each(data.maximos, function (keyarr, value) {
+                cadena += "<p>" + value + "</p><br>";
+            });
+            $("#maximo").html(cadena); 
         });
     });
     </script>

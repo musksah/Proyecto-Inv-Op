@@ -1,4 +1,3 @@
-
 <?php require('partials/head.php'); ?>
 
 <body id="page-top">
@@ -53,6 +52,16 @@
                           <input type="number" min="2" max="15" placeholder="Enter a number" class="form-control" name="num_alterns" id="num_alterns" required>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-4" style="margin-top: 10px">
+                        </div>
+                        <div class="col-md-8" style="margin-top: 10px">
+                          <div class="form-check">
+                            <input type="checkbox" name="customized_alternatives" id="customized_alternatives">
+                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Personalizar alternativas</label>
+                          </div>
+                        </div>
+                      </div>
                       <!-- <input type="hidden"  value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required> -->
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-4">
@@ -62,12 +71,8 @@
                           <input type="number" min="2" max="10" placeholder="Enter a number" class="form-control" name="num_uncerts" id="num_uncerts" required>
                         </div>
                       </div>
-                      <div class="col-md-8" style="margin-top: 10px">
-                          <div class="form-check">
-                            <input type="checkbox" name="customized_alternatives" id="customized_alternatives">
-                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Customize alternativess</label>
-                          </div>
-                        </div>
+                      <div id="div-name-alternatives">
+                      </div>
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-12 text-center">
                           <input type="submit" placeholder="Enter a number" class="btn btn-primary" value="Generate Matrix">
@@ -109,8 +114,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Result</h6>
                   </div>
                   <div class="card-body">
-                    <label>The alternative with the highest maximum payment is</label>
-                    <span  id="maximo"> </span>
+                    <label>The alternative with the highest maximum payment is:</label>
+                    <span id="maximo"> </span>
                   </div>
 
                 </div>
