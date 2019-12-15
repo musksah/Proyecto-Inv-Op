@@ -28,6 +28,8 @@
                             <h6 class="card-subtitle mb-2 text-muted">Facultad de Ingeniería y Matemáticas Konrad Lorenz</h6>
                             <p class="card-text">Este software fue hecho por:</p>
                             <p class="card-text">Sebastián Andrés Huérfano Rodríguez</p>
+                            <p class="card-text">Daniela Cepeda</p>
+                            <p class="card-text">Angie Dayana Camargo Moreras</p>
                         </div>
                     </div>
                     <!-- End of Main Content -->
