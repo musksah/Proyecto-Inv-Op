@@ -20,15 +20,17 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Información y créditos</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Information and credits</h1>
                     </div>
                     <div class="card col-md-12">
                         <div class="card-body">
-                            <h5 class="card-title text-primary" style="margin-bottom: 30px;">Investigación de Operaciones</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Facultad de Ingeniería y Matemáticas Konrad Lorenz</h6>
-                            <p class="card-text">Este software fue hecho por:</p>
+                            <h5 class="card-title text-primary" style="margin-bottom: 30px;">
+                                Operations researchs</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Faculty of Engineering and Mathematics Konrad Lorenz</h6>
+                            <p class="card-text">
+                                This software was made by:</p>
                             <p class="card-text">Sebastián Andrés Huérfano Rodríguez</p>
-                            <p class="card-text">Daniela Cepeda</p>
+                            <p class="card-text">Daniela Cepeda Holguín</p>
                             <p class="card-text">Angie Dayana Camargo Moreras</p>
                         </div>
                     </div>

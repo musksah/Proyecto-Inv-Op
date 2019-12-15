@@ -47,10 +47,10 @@
                           <label for=""></label>  
                         </div> -->
                         <div class="col-md-4" style="margin-top: 10px">
-                          <label for="num_alterns" class="float-right">Cantidad de Alternativas:</label>
+                          <label for="num_alterns" class="float-right">Number of Alternatives:</label>
                         </div>
                         <div class="col-md-8">
-                          <input type="number" min="2" max="10" placeholder="Ingrese un número" class="form-control" name="num_alterns" id="num_alterns" required>
+                          <input type="number" min="2" max="10" placeholder="Enter a number" class="form-control" name="num_alterns" id="num_alterns" required>
                         </div>
                       </div>
                       <div class="row">
@@ -59,7 +59,7 @@
                         <div class="col-md-8" style="margin-top: 10px">
                           <div class="form-check">
                             <input type="checkbox" name="customized_alternatives" id="customized_alternatives">
-                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Personalizar alternativas</label>
+                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Customize alternatives</label>
                           </div>
                         </div>
                       </div>
@@ -76,7 +76,7 @@
                       </div>
                       <div class="form-group row" style="margin-top: 30px">
                         <div class="col-md-12 text-center">
-                          <input type="submit" placeholder="Ingrese un número" class="btn btn-primary" value="Generar Matriz">
+                          <input type="submit" placeholder="Ingrese un número" class="btn btn-primary" value="Generate Matrix">
                         </div>
                       </div>
                     </form>
@@ -126,8 +126,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Analysis</h6>
                   </div>
                   <div class="card-body">
-                    <h4 class="text-info">Métrica de Estabilidad</h4>
-                    <p>Si se desea tomar un desición estable la mejor alternativa(as) es(son): </p>
+                    <h4 class="text-info">Stability Metric</h4>
+                    <p>If you want to make a stable decision, the best alternative (s) is (are): </p>
                     <span id="balanced_analisys"></span>
                   </div>
                 </div>
