@@ -19,8 +19,6 @@ function MiniMaxRegreat($data)
     } else {
         $data_graphic = dataGraphic($data_matrix);
     }
-    // print_r($data_graphic);
-    // die;
     echo json_encode($data_graphic);
 }
 

@@ -2,8 +2,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-    <div class="sidebar-brand-text mx-3">Konrad Lorenz<sup></sup></div>
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php" style="color: #fff;background: #fff;">
+    <div class="sidebar-brand-text mx-3"> <img src="img/logopng.png" alt="" width="150px" height="60px"> </div>
 </a>
 
 <!-- Divider -->
@@ -39,7 +39,6 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-table"></i>
         <span>Metodos No Probabilísticos</span>
-
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -47,7 +46,6 @@
             <a class="collapse-item" href="maximax.php">MaxiMax</a>
             <a class="collapse-item" href="maximin.php">MaxiMin</a>
             <a class="collapse-item" href="minimaxregreat.php">MiniMax Regreat</a>
-
         </div>
     </div>
 </li>

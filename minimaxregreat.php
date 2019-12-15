@@ -28,11 +28,8 @@
                     </div>
 
                     <div>
-
                         <div>
-
                             <div class="col-md-9 offset-md-1">
-
                                 <!-- Default Card Example -->
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -43,9 +40,6 @@
                                             <input type="hidden" name="funcion" value="PayOffMatrix">
 
                                             <div class="row">
-                                                <!-- <div class="col-md-6">
-                          <label for=""></label>  
-                        </div> -->
                                                 <div class="col-md-4" style="margin-top: 10px">
                                                     <label for="num_alterns" class="float-right">Cantidad de Alternativas:</label>
                                                 </div>
