@@ -24,7 +24,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Sensitivity Analysis</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Regla de Desición de Arrepentimiento MinMax</h1>
                     </div>
 
                     <div>
@@ -96,14 +96,8 @@
                                     <div class="card-header">
                                         <h6 class="m-0 font-weight-bold text-primary">Minimax Regreat</h6>
                                     </div>
-                                    <div class="card-body" id="matrix_emv">
-                                        <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <div id="myDiv">
-                                                    <!-- Plotly chart will be drawn inside this DIV -->
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="card-body" id="matrix_minmaxregreat">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -119,9 +113,9 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Analysis</h6>
                                     </div>
                                     <div class="card-body">
-                                        <h4 class="text-info">Métrica de Estabilidad</h4>
-                                        <p>Si se desea tomar un desición estable la mejor alternativa(as) es(son): </p>
-                                        <span id="balanced_analisys"></span>
+                                        <h4 class="text-info">Alternatives</h4>
+                                        <p>Según este métodos la(s) mejor(es) alternativa(as) es(son): </p>
+                                        <span id="alternatives_regreat"></span>
                                     </div>
                                 </div>
                             </div>

@@ -36,7 +36,7 @@
             event.preventDefault();
             $.ajax({
                 method: "POST",
-                url: "controllers/sensitivityController.php",
+                url: "controllers/minimaxregreatControler.php",
                 data: $(this).serialize()
             }).done(function (data) {
                 console.log(data);
