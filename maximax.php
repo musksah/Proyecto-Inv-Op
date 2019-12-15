@@ -58,7 +58,7 @@
                         <div class="col-md-8" style="margin-top: 10px">
                           <div class="form-check">
                             <input type="checkbox" name="customized_alternatives" id="customized_alternatives">
-                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Personalizar alternativas</label>
+                            <label class="form-check-label" for="customized_alternatives" style="margin-bottom: 10px">Customize alternatives</label>
                           </div>
                         </div>
                       </div>
@@ -113,8 +113,8 @@
                   <div class="card-header">
                     <h6 class="m-0 font-weight-bold text-primary">Result</h6>
                   </div>
-                  <div class="card-body">
-                    <label>The alternative with the highest maximum payment is:</label>
+                  <div class="card-body" class="text-info">
+                  <p>The alternative (s) with the maximum payment is (are):</p>
                     <span id="maximo"> </span>
                   </div>
 

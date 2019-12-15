@@ -22,7 +22,7 @@ function encontrarMayores($data)
 
     $headers = getHeaders($data);
 
-    $datostr .= "<br>";
+    //$datostr .= "<br>";
     $datost = '
     <div class="table-responsive">
     <table class="table table-striped">';
@@ -97,7 +97,7 @@ function PayOffMatrix($data)
             $("#matrix_max").html(data.datost);
             let cadena = "";
             $.each(data.maximos, function (keyarr, value) {
-                cadena += "<p>" + value + "</p><br>";
+                cadena += "<p>" + value + "</p>";
             });
             $("#maximo").html(cadena); 
         });

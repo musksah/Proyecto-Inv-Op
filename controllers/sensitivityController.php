@@ -225,15 +225,15 @@ function PayOffMatrix($data)
     <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
     <input type="hidden" name="funcion" value="sensitivityAnalisis">
     <div class="table-responsive">
-    <table class="table">
-      <thead>
+    <table class="table table-striped">
+      <thead class="bg-secondary text-white">
         <tr>
-          <th scope="col" class="text-center">Alternatives Desicion</th>';
+          <th scope="col" class="text-center"><h4>Alternatives Desicion</h4></th>';
 
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
             <th scope="col">
-                <h3 class="text-center">Evento' . $j . '</h3>
+                <h4 class="text-center">Evento' . $j . '</h4>
             </th>';
     }
     $table_form .= "</thead><tbody>";
@@ -247,7 +247,7 @@ function PayOffMatrix($data)
             $alternatives_name = $data['alternative'];
             $table_form .= "<h3>" . $alternatives_name[$i - 1] . "</h3></td>";
         } else {
-            $table_form .= "<h3>Alternative" . $i . "</h3></td>";
+            $table_form .= "<h4>Alternative" . $i . "</h4></td>";
         }
         for ($j = 1; $j < $colums + 1; $j++) {
             $table_form .= "
@@ -267,7 +267,7 @@ function PayOffMatrix($data)
         </table>
         </div>
         <div class='form-group'>
-            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calcular</button>
+            <button type='submit' class='btn btn-primary' id='btn_submit_payoff'>Calculate</button>
         </div>
     </form>";
     echo json_encode($table_form);

@@ -126,7 +126,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Analysis</h6>
                   </div>
                   <div class="card-body">
-                    <h4 class="text-info">Stability Metric</h4>
+                    <h5 class="text-info">Stability Metric</h4>
                     <p>If you want to make a stable decision, the best alternative (s) is (are): </p>
                     <span id="balanced_analisys"></span>
                   </div>
