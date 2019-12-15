@@ -63,7 +63,7 @@
             <h6 class="collapse-header">Methods:</h6>
             <a class="collapse-item" href="">Maximax (Optimistic)</a>
             <a class="collapse-item" href="">Maximin (Pessimistic)</a>
-            <a class="collapse-item" href="">Minimax (Repentance)</a>
+            <a class="collapse-item" href="maximin.php">Minimax (Repentance)</a>
           </div>
         </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -72,9 +72,10 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Metodos:</h6>
-            <a class="collapse-item" href="sensitivity_analisis.php">EMV Sensibility Analysis</a>
+            <h6 class="collapse-header">Methods:</h6>
             <a class="collapse-item" href="">EOL</a>
+            <a class="collapse-item" href="sensitivity_analisis.php">EMV Sensibility Analysis</a>
+           
           </div>
         </div>
       </li>
