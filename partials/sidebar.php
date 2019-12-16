@@ -47,6 +47,7 @@
                 <a class="collapse-item" href="maximin.php">MaxiMin</a>
                 <a class="collapse-item" href="minimaxregreat.php">MiniMax Regreat</a>
                 <a class="collapse-item" href="expectedvalue.php">Expected Value</a>
+                <a class="collapse-item" href="expectRegreat.php">Expected Regreat</a>
             </div>
         </div>
     </li>
