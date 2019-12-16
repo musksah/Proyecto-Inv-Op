@@ -61,7 +61,7 @@ function tableEmv($data)
     $headers_col = getHeaders($data['Alternative1']);
     $table = "<table class='table table-striped'>";
     $table .= "<thead>";
-    $table .= "<th class='bg-secondary text-white'> Alternatives Desicion </th>";
+    $table .= "<th class='bg-secondary text-white'><center><h3>Alternatives Desicion</h3></center></th>";
     foreach ($headers_col as $key => $value) {
         $table .= "<th class='bg-secondary text-white'> <h3> $value </h3> </th>";
     }
@@ -166,33 +166,6 @@ function generateMatrixRegreat($data, $names = false)
     } else {
         return generateTableMatrixRegreat($data, $solutions);
     }
-}
-
-function generateTableMatrixRegreat($data, $solutions, $names = false)
-{
-    $headers = getHeaders($data['Alternative1']);
-    $table = "<table class='table table-striped'>";
-    $table .= "<thead><tr><th class='text-center bg-secondary text-white'><h3>Alternatives Desicion</h3></th>";
-    foreach ($headers as $key => $value) {
-        $table .= "<th scope='col' class='text-center bg-secondary text-white'><h3 class=text-center'>$value</h3></th>";
-    }
-    $table .= "</tr></head><tbody>";
-    foreach ($data as $key => $value) {
-        $table .= "<tr>";
-        if ($names !== false) {
-
-            $table .= "<td><center><h4>" . $names[$key] . "</h4></center></td>";
-        } else {
-            $table .= "<td><h3><center>$key</center></h3></td>";
-        }
-        foreach ($value as $keycol => $valuecol) {
-            $table .= "<td><center><h4>$valuecol</h4></center></td>";
-        }
-        $table .= "</tr>";
-    }
-    $table .= "</tbody>";
-    $table .= "</table>";
-    return ['table' => $table, 'solutions' => $solutions];
 }
 
 function getColumns($data)
