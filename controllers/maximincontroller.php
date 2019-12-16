@@ -17,11 +17,11 @@ function getHeaders($data)
 
 function encontrarMayores($data)
 {
+    $data_menor = $data['data'];
     $datost = " ";
     $datostr = " ";
-   
 
-    $headers = getHeaders($data);
+    $headers = getHeaders($data_menor);
 
     $datostr .= "<br>";
     $datost = '
@@ -37,15 +37,15 @@ function encontrarMayores($data)
     $datost .= '</tr></thead><tbody>';
 
 
-    foreach ($data as $key => $value) {
+    foreach ($data_menor as $key => $value) {
         $datost .= "<tr>";
         $datost .= "<td><h4><center>$key</center></h4></td>";
         foreach ($value as $keycol => $valuecol) {
             //echo" ";
             $datost .= "<td><h5><center>$valuecol</center></h5></td>";
         }
-        $minimo= min($value);
-        $minimos[$key]=$minimo;
+        $minimo = min($value);
+        $minimos[$key] = $minimo;
         $datost .= "<td><h6><center>$minimo</center></h6></td>";
         $datost .= '</tr>';
     }
@@ -55,11 +55,11 @@ function encontrarMayores($data)
     </div>';
     $minimo_minimos = max($minimos);
     foreach ($minimos as $key => $value) {
-        if( $minimo_minimos == $value){
-            $result_minimos[] = $key; 
+        if ($minimo_minimos == $value) {
+            $result_minimos[] = $key;
         }
     }
-    echo json_encode(['datost'=>$datost,'minimos'=>$result_minimos]);
+    echo json_encode(['datost' => $datost, 'minimos' => $result_minimos]);
 }
 
 function matrixRegreat($mayor_a, $mayor_b, $a, $b)
@@ -111,34 +111,39 @@ function PayOffMatrix($data)
         <tr>
           <th scope="col" class="text-center"><h4>Alternatives Desicion</h4></th>';
 
-          for ($j = 1; $j < $colums + 1; $j++) {
-            $table_form .= '
-                <th scope="col">
-                    <h4 class="text-center">U' . $j . '</h4>
+    for ($j = 1; $j < $colums + 1; $j++) {
+        $table_form .= '
+                <th scope="col" class="bg-secondary text-white">
+                    <h3 class="text-center">Event' . $j . '</h3>
                 </th>';
-        }
-        $table_form .= "</thead><tbody>";
-    
-    
-        for ($i = 1; $i < $rows + 1; $i++) {
-            $table_form .= "
+    }
+    $table_form .= "</tr></thead><tbody>";
+
+
+    for ($i = 1; $i < $rows + 1; $i++) {
+        $table_form .= "
             <tr> 
-                <td class='text-center'>
-                    <h4>Alternative" . $i . "</h4>
-                    </td>";
-            for ($j = 1; $j < $colums + 1; $j++) {
-                $table_form .= "
+                <td class='text-center'>";
+        if (!empty($data['alternative'])) {
+            $alternatives_name = $data['alternative'];
+            $table_form .= "<h3>" . $alternatives_name[$i - 1] . "</h3></td>";
+        } else {
+            $table_form .= "<h3>Alternative" . $i . "</h3></td>";
+        }
+        for ($j = 1; $j < $colums + 1; $j++) {
+            $table_form .= "
                 <td>
                     <div class='form-group'>
-                        <input h4 type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
-                    </div>
-                </td>";
+                        <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='data[Alternative" . $i . "][U" . $j . "]'>";
+            if (!empty($data['alternative'])) {
+                $table_form .= "<input type='hidden' class='form-control' id='name_alternative[Alternative" . $i . "]' name='name_alternative[Alternative" . $i . "]' value='" . $alternatives_name[$i - 1] . "'>";
             }
-            $table_form .= "
-            </tr>";
+            $table_form .= "</div></td>";
         }
-    
-        $table_form .= "
+        $table_form .= "</tr>";
+    }
+
+    $table_form .= "
                 </tbody>
             </table>
             </div>
@@ -148,4 +153,3 @@ function PayOffMatrix($data)
         </form>";
     echo json_encode($table_form);
 }
-    

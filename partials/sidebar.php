@@ -33,6 +33,8 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Methods:</h6>
+                <a class="collapse-item" href="expectedvalue.php">Expected Value</a>
+                <a class="collapse-item" href="expectRegreat.php">Expected Regreat</a>
                 <a class="collapse-item" href="sensitivity_analisis.php">Sensibility Analysis</a>
             </div>
         </div>
@@ -46,8 +48,7 @@
                 <a class="collapse-item" href="maximax.php">MaxiMax</a>
                 <a class="collapse-item" href="maximin.php">MaxiMin</a>
                 <a class="collapse-item" href="minimaxregreat.php">MiniMax Regreat</a>
-                <a class="collapse-item" href="expectedvalue.php">Expected Value</a>
-                <a class="collapse-item" href="expectRegreat.php">Expected Regreat</a>
+              
             </div>
         </div>
     </li>
