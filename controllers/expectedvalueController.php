@@ -9,19 +9,25 @@ $probability = false;
 unset($data['funcion']);
 $function($data);
 
-function MiniMaxRegreat($data)
+function emvExpectedValue($data)
 {
     if (!empty($data['name_alternative'])) {
         $names = $data['name_alternative'];
-        $table = generateMatrixRegreat($data['data'], $names);
-        foreach ($table['solutions'] as $key => $value) {
-            $table['solutions'][] = $names[$value];
-            unset($table['solutions'][$key]);
-        }
     } else {
-        $table = generateMatrixRegreat($data['data']);
+        $emvMatrix = calcEMV($data['data'], $data['probability']);
+        $maximo_emv = max($emvMatrix['emv']);
+        foreach ($emvMatrix['emv'] as $key => $value) {
+            if ($maximo_emv == $value) {
+                $solutions[] = $key;
+            }
+        }
+        foreach ($solutions as $key => $value) {
+            $solutions[] = $value;
+            unset($solutions[$key]);
+        }
+        $table = tableEmv($emvMatrix['matrix']);
     }
-    echo json_encode($table);
+    echo json_encode(['table' => $table,'solutions'=>$solutions]);
 }
 
 function calcEMV($data, $probability)
@@ -35,7 +41,7 @@ function calcEMV($data, $probability)
         $emv[$key] = $sum;
         $data[$key]['EMV'] = $sum;
     }
-    return $emv;
+    return ['emv' => $emv, 'matrix' => $data];
 }
 
 function getNamesAlternatives($name_alternatives, $data_graphic)
@@ -52,15 +58,14 @@ function getNamesAlternatives($name_alternatives, $data_graphic)
 
 function tableEmv($data)
 {
-    $headers_col = getHeaders($data['A1']);
-    $table = "<table class='table'>";
-
-    $table .= "<tr>";
-    $table .= "<td> Alternatives Desicion </td>";
+    $headers_col = getHeaders($data['Alternative1']);
+    $table = "<table class='table table-striped'>";
+    $table .= "<thead>";
+    $table .= "<th class='bg-secondary text-white'> Alternatives Desicion </th>";
     foreach ($headers_col as $key => $value) {
-        $table .= "<td> <h3> $value </h3> </td>";
+        $table .= "<th class='bg-secondary text-white'> <h3> $value </h3> </th>";
     }
-    $table .= "</tr>";
+    $table .= "</thead>";
     foreach ($data as $key => $value) {
         $table .= "<tr>";
         $table .= "<td> $key </td>";
@@ -174,11 +179,10 @@ function generateTableMatrixRegreat($data, $solutions, $names = false)
     $table .= "</tr></head><tbody>";
     foreach ($data as $key => $value) {
         $table .= "<tr>";
-        if ($names !== false) { 
-            
-            $table .= "<td><center><h4>".$names[$key]."</h4></center></td>";
-            
-        }else{
+        if ($names !== false) {
+
+            $table .= "<td><center><h4>" . $names[$key] . "</h4></center></td>";
+        } else {
             $table .= "<td><h3><center>$key</center></h3></td>";
         }
         foreach ($value as $keycol => $valuecol) {
@@ -204,6 +208,7 @@ function PayOffMatrix($data)
     if (!empty($data['alternative'])) {
         $alternatives_name = $data['alternative'];
     }
+
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
     $table_form = '
@@ -212,22 +217,22 @@ function PayOffMatrix($data)
         event.preventDefault();
         $.ajax({
             method: "POST",
-            url: "controllers/minimaxregreatControler.php",
+            url: "controllers/expectedvalueController.php",
             data: $(this).serialize()
         }).done(function (data) {
             console.log(data);
-            $("#matrix_minmaxregreat").html(data.table);
+            $("#emv_desicion_matrix").html(data.table);
             let cadena = "";
             $.each(data.solutions, function (keyarr, value) {
-                cadena += "<p>" + value + "</p><br>";
+               cadena += "<p>" + value + "</p><br>";
             });
-            $("#alternatives_regreat").html(cadena);
+            $("#alternatives_emv").html(cadena);
         });
     });
     </script>
     
-    <form action="controllers/maximaxcontroller.php" method="POST" id="form_payoff_data">
-    <input type="hidden" name="funcion" value="MiniMaxRegreat">
+    <form action="controllers/expectedvalueController.php" method="POST" id="form_payoff_data">
+    <input type="hidden" name="funcion" value="emvExpectedValue">
     <div class="table-responsive">
     <table class="table table-striped">
       <thead>
@@ -265,7 +270,15 @@ function PayOffMatrix($data)
         }
         $table_form .= "</tr>";
     }
+    $table_form .= "<tr><td><center><h3>Probability</h3></center></td>";
 
+    for ($j = 1; $j < $colums + 1; $j++) {
+        $table_form .= '
+        <td scope="col">
+        <h3 class="text-center"><input type="text" name="probability[U' . $j . ']" id="probability' . $j . '" class="form-control"></h3>
+        </td>';
+    }
+    $table_form .= "</tr>";
     $table_form .= "
             </tbody>
         </table>
