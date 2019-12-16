@@ -17,10 +17,11 @@ function getHeaders($data)
 
 function encontrarMayores($data)
 {
+    $data_mayor = $data['data'];
     $datost = " ";
     $datostr = " ";
 
-    $headers = getHeaders($data);
+    $headers = getHeaders($data_mayor);
 
     $datostr .= "<br>";
     $datost = '
@@ -35,7 +36,7 @@ function encontrarMayores($data)
     $datost .= ' <th scope="col" class="text-center"><h3>Maximum</h3></th>';
     $datost .= '</tr></thead><tbody>';
 
-    foreach ($data as $key => $value) {
+    foreach ($data_mayor as $key => $value) {
         $datost .= "<tr>";
         $datost .= "<td><h4><center>$key</center></h4></td>";
         foreach ($value as $keycol => $valuecol) {
@@ -80,7 +81,7 @@ function matrixRegreat($mayor_a, $mayor_b, $a, $b)
 function PayOffMatrix($data)
 {
     if (!empty($data['alternative'])) {
-     $alternatives_name= $data['alternative'];
+        $alternatives_name = $data['alternative'];
     }
     $rows = $data['num_alterns'];
     $colums = $data['num_uncerts'];
@@ -108,35 +109,40 @@ function PayOffMatrix($data)
     <input type="hidden" name="funcion" value="encontrarMayores">
     <div class="table-responsive">
     <table class="table table-striped">
-      <thead class="bg-secondary text-white" >
+      <thead>
         <tr>
-          <th  scope="col" class="text-center"><h4>Alternatives Decision</h4></th>';
+          <th scope="col" class="text-center bg-secondary text-white"><h3>Alternatives Desicion</h3></th>';
 
     for ($j = 1; $j < $colums + 1; $j++) {
         $table_form .= '
-            <th scope="col">
-                <h4 class="text-center">U' . $j . '</h4>
+            <th scope="col" class="bg-secondary text-white">
+                <h3 class="text-center">Event' . $j . '</h3>
             </th>';
     }
-    $table_form .= "</thead><tbody>";
+    $table_form .= "</tr></thead><tbody>";
 
 
     for ($i = 1; $i < $rows + 1; $i++) {
         $table_form .= "
         <tr> 
-            <td class='text-center'>
-                <h4>Alternative" . $i . "</h4>
-                </td>";
+            <td class='text-center'>";
+        if (!empty($data['alternative'])) {
+            $alternatives_name = $data['alternative'];
+            $table_form .= "<h3>" . $alternatives_name[$i - 1] . "</h3></td>";
+        } else {
+            $table_form .= "<h3>Alternative" . $i . "</h3></td>";
+        }
         for ($j = 1; $j < $colums + 1; $j++) {
             $table_form .= "
             <td>
                 <div class='form-group'>
-                    <input h4 type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='Alternative" . $i . "[U" . $j . "]'>
-                </div>
-            </td>";
+                    <input type='text' class='form-control' id='Alternative" . $i . "[U" . $j . "]' placeholder='Enter Number' name='data[Alternative" . $i . "][U" . $j . "]'>";
+            if (!empty($data['alternative'])) {
+                $table_form .= "<input type='hidden' class='form-control' id='name_alternative[Alternative" . $i . "]' name='name_alternative[Alternative" . $i . "]' value='" . $alternatives_name[$i - 1] . "'>";
+            }
+            $table_form .= "</div></td>";
         }
-        $table_form .= "
-        </tr>";
+        $table_form .= "</tr>";
     }
 
     $table_form .= "
@@ -148,8 +154,5 @@ function PayOffMatrix($data)
         </div>
     </form>";
     echo json_encode($table_form);
-
 }
-
-
     
