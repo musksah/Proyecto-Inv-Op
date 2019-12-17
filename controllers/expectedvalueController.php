@@ -11,8 +11,6 @@ $function($data);
 
 function emvExpectedValue($data)
 {
-    print_r($data);
-    die;
     if (!empty($data['name_alternative'])) {
         $names = $data['name_alternative'];
     } else {
