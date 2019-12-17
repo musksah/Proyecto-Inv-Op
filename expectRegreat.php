@@ -57,15 +57,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <input type="hidden" value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required> -->
-                                            <div class="form-group row" style="margin-top: 30px">
+                                            <input type="hidden" value="2" placeholder="Ingrese un número" class="form-control" name="num_uncerts" id="num_uncerts" required>
+                                            <!-- <div class="form-group row" style="margin-top: 30px">
                                                 <div class="col-md-4">
                                                     <label for="num_uncerts" class="float-right">Uncertainty Cases:</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="number" min="2" max="10" placeholder="Enter the text" class="form-control" name="num_uncerts" id="num_uncerts" required>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div id="div-name-alternatives">
                                             </div>
                                             <div class="form-group row" style="margin-top: 30px">

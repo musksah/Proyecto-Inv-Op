@@ -13,21 +13,22 @@ function emvExpectedValue($data)
 {
     if (!empty($data['name_alternative'])) {
         $names = $data['name_alternative'];
-    } else {
-        $emvMatrix = calcEMV($data['data'], $data['probability']);
-        $maximo_emv = max($emvMatrix['emv']);
-        foreach ($emvMatrix['emv'] as $key => $value) {
-            if ($maximo_emv == $value) {
-                $solutions[] = $key;
-            }
-        }
-        foreach ($solutions as $key => $value) {
-            $solutions[] = $value;
-            unset($solutions[$key]);
-        }
-        $table = tableEmv($emvMatrix['matrix']);
+        unset($data['name_alternative']);
     }
-    echo json_encode(['table' => $table,'solutions'=>$solutions]);
+    $emvMatrix = calcEMV($data['data'], $data['probability']);
+    $maximo_emv = max($emvMatrix['emv']);
+    foreach ($emvMatrix['emv'] as $key => $value) {
+        if ($maximo_emv == $value) {
+            $solutions[] = $key;
+        }
+    }
+    foreach ($solutions as $key => $value) {
+        $solutions[] = $value;
+        unset($solutions[$key]);
+    }
+    $table = tableEmv($emvMatrix['matrix']);
+
+    echo json_encode(['table' => $table, 'solutions' => $solutions]);
 }
 
 function calcEMV($data, $probability)
