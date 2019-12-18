@@ -15,6 +15,11 @@
             <i class="fas fa-info-circle"></i>
             <span>About</span></a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="Manual.pdf">
+            <i class="fas fa-question-circle"></i>
+            <span>Help</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

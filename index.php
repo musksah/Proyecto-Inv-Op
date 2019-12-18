@@ -24,14 +24,17 @@
                     </div>
                     <div class="card col-md-12">
                         <div class="card-body">
-                            <h5 class="card-title text-primary" style="margin-bottom: 30px;">
-                                Operations researchs</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Faculty of Engineering and Mathematics Konrad Lorenz</h6>
-                            <p class="card-text">
-                                This software was made by:</p>
+                            <!--<h6 class="card-title text-primary" style="margin-bottom: 30px;">
+                                Operations researchs</h6>-->
+                            <h5 class="card-subtitle mb-2  text-primary">Faculty of Engineering and Mathematics Konrad Lorenz</h5>
+                            <h5 class="card-subtitle mb-2  text-primary">
+                                This software was made by:</h5>
                             <p class="card-text">Sebastián Andrés Huérfano Rodríguez</p>
                             <p class="card-text">Daniela Cepeda Holguín</p>
                             <p class="card-text">Angie Dayana Camargo Moreras</p>
+                            <h5 class="card-subtitle mb-2 text-primary">
+                                Delivered to the teacher:</h5>
+                            <p class="card-text">Julio Mario Daza Escorcia </p>
                         </div>
                     </div>
                     <!-- End of Main Content -->
