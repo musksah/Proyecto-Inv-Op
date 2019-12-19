@@ -32,8 +32,8 @@
                             <p class="card-text">Sebastián Andrés Huérfano Rodríguez</p>
                             <p class="card-text">Daniela Cepeda Holguín</p>
                             <p class="card-text">Angie Dayana Camargo Moreras</p>
-                            <h5 class="card-subtitle mb-2 text-primary">
-                                Delivered to the teacher:</h5>
+                            <h5 class="card-subtitle mb-2 text-primary mt-1">
+                                Presented to the professor:</h5>
                             <p class="card-text">Julio Mario Daza Escorcia </p>
                         </div>
                     </div>
